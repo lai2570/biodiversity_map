@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>植物多樣性地圖</title>
+    <link rel="icon" href="../image/QoQ.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden; /* 關閉捲動 */
+        }
+
+        .page {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(1.07);
+            transition: opacity 1.1s ease, transform 1.2s ease;
+            pointer-events: none;
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        /* Tailwind utility-based background */
+        .bg-lab {
+            background-image: url('../image/background.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body class="text-gray-200 bg-lab">
+
+<!-- 導覽列 -->
+<nav class="absolute top-0 left-0 w-full px-6 py-3 bg-black/30 backdrop-blur-sm text-white flex space-x-6 z-50">
+    <a href="intro.html" class="hover:text-yellow-300">簡介</a>
+    <a href="map.html" class="hover:text-yellow-300">地圖</a>
+    <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
+    <a href="reference.html" class="hover:text-yellow-300">參考資料</a>
+    <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
+</nav>
+
+<!-- 第 1 頁 -->
+<div class="page page-1 active">
+    <h1 class="text-5xl font-bold tracking-wide drop-shadow-xl">植物多樣性地圖</h1>
+    <p class="mt-4 text-lg text-gray-300 max-w-xl text-center">透過衛星影像與地理資訊探索地球生態</p>
+</div>
+
+<!-- 第 2 頁：圖片一 -->
+<div class="page page-2">
+    <img src="../image/cape.jpg" class="rounded-xl shadow-2xl max-h-[70vh] object-contain" />
+    <p class="mt-6 max-w-xl text-center text-gray-300">圖片一解說文字（可自行修改）</p>
+</div>
+
+<!-- 第 3 頁：圖片二 -->
+<div class="page page-3">
+    <img src="../image/EMIT.jpg" class="rounded-xl shadow-2xl max-h-[70vh] object-contain" />
+    <p class="mt-6 max-w-xl text-center text-gray-300">圖片二解說文字（可自行修改）</p>
+</div>
+
+<!-- 第 4 頁：純文字 -->
+<div class="page page-4">
+    <div class="max-w-2xl px-6 text-center text-lg leading-relaxed text-gray-300">
+        本網站旨在以視覺化方式呈現全球植物多樣性熱點，透過衛星光譜、遙測技術、GIS 分析與生態統計模型，
+        協助研究人員與保育工作者快速理解區域生態重要性與變遷趨勢。
+    </div>
+</div>
+
+<script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll(".page");
+    const totalPages = pages.length;
+    let isSwitching = false;
+
+    // 滑鼠滾輪換頁
+    window.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        if (isSwitching) return;
+        isSwitching = true;
+
+        if (event.deltaY > 0 && currentPage < totalPages - 1) currentPage++;
+        else if (event.deltaY < 0 && currentPage > 0) currentPage--;
+
+        pages.forEach((page, index) => {
+            page.classList.toggle("active", index === currentPage);
+        });
+
+        setTimeout(() => (isSwitching = false), 900);
+    }, { passive: false });
+
+    // 手機觸控換頁
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    document.addEventListener("touchstart", (e) => {
+        touchStartY = e.changedTouches[0].clientY;
+    });
+
+    document.addEventListener("touchend", (e) => {
+        touchEndY = e.changedTouches[0].clientY;
+        const diff = touchStartY - touchEndY;
+
+        if (Math.abs(diff) < 50) return;
+        if (isSwitching) return;
+        isSwitching = true;
+
+        if (diff > 0 && currentPage < totalPages - 1) currentPage++;
+        else if (diff < 0 && currentPage > 0) currentPage--;
+
+        pages.forEach((page, index) => {
+            page.classList.toggle("active", index === currentPage);
+        });
+
+        setTimeout(() => (isSwitching = false), 900);
+    });
+</script>
+
+<!-- 圖片來源標註 -->
+
+
+</body>
+</html>
