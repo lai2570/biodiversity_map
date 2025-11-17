@@ -52,7 +52,7 @@
     <!-- 導覽列 -->
     <nav class="bg-gray-800 text-white px-6 py-3 flex space-x-6 shadow-md">
         <a href="index.html" class="hover:text-yellow-300">簡介</a>
-        <a href="webtest.html" class="hover:text-yellow-300 transition">地圖</a>
+        <a href="map.html" class="hover:text-yellow-300 transition">地圖</a>
         <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
         <a href="reference.html" class="hover:text-yellow-300 transition">參考資料</a>
         <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
@@ -75,7 +75,7 @@
         // -------------------------------------------------------------------
         // 2. 設定底圖圖層
         // -------------------------------------------------------------------
-        var layer_google = L.tileLayer('http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga');
+        var layer_google = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga');
         var layer_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
         layer_google.addTo(map);
@@ -84,8 +84,8 @@
         // 3. 圖層控制器
         // -------------------------------------------------------------------
         var baseLayers = {
-            "Google 地圖": layer_google,
-            "OSM 地圖": layer_osm
+            "衛星地圖": layer_google,
+            "OSM地圖": layer_osm
         };
         L.control.layers(baseLayers).addTo(map);
 
@@ -126,8 +126,8 @@
             map.removeControl(colorbar_google);
             map.removeControl(colorbar_osm);
 
-            if (e.name === "Google 地圖") colorbar_google.addTo(map);
-            if (e.name === "OSM 地圖") colorbar_osm.addTo(map);
+            if (e.name === "衛星地圖") colorbar_google.addTo(map);
+            if (e.name === "OSM地圖") colorbar_osm.addTo(map);
         });
     </script>
 
