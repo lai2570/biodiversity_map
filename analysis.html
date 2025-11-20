@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>參考資料</title>
 
-    <link rel="icon" href="image/QoQ.png" type="image/png" />
+    <link rel="icon" href="./image/QoQ.png" type="image/png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bg-lab {
@@ -36,7 +36,7 @@
     <nav class="absolute top-0 left-0 w-full px-6 py-3 bg-black/30 backdrop-blur-sm text-white flex items-center justify-between z-50">
         <!-- 左側 Logo 與文字 -->
         <div class="flex items-center space-x-3">
-            <img src="image/QoQ.png" alt="Logo" class="h-8 w-8 rounded">
+            <img src="./image/QoQ.png" alt="Logo" class="h-8 w-8 rounded">
             <span class="text-xl font-bold tracking-wide">植物多樣性地圖</span>
         </div>
 
@@ -65,7 +65,7 @@
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">1. NDVI</h3>
             <div class="md:grid md:grid-cols-2 md:gap-6 items-start">
-                <img src="/image/NDVI.jpg" alt="NDVI" class="w-full md:w-auto rounded mb-4 md:mb-0">
+                <img src="./image/NDVI.jpg" alt="NDVI" class="w-full md:w-auto rounded mb-4 md:mb-0">
                 <div>
                     <p class="font-bold mb-1">歸一化植被指標(NDVI):</p>
                     <p class="text-justify mb-1">
@@ -85,7 +85,7 @@
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">2. NDWI</h3>
             <div class="md:grid md:grid-cols-2 md:gap-6 items-start">
-                <img src="/image/NDWI.jpg" alt="NDWI" class="w-full md:w-auto rounded mb-4 md:mb-0">
+                <img src="./image/NDWI.jpg" alt="NDWI" class="w-full md:w-auto rounded mb-4 md:mb-0">
                 <div>
                     <p class="font-bold mb-1">歸一化水體指標 (NDWI):</p>
                     <p class="text-justify mb-1">
@@ -118,8 +118,8 @@
     <section class="mb-8">
         <h2 class="text-2xl font-semibold mb-4">結果</h2>
         <div class="md:flex md:space-x-4 mb-4">
-            <img src="/image/band1_381_2492nm.png" alt="band1" class="w-full md:w-1/2 rounded mb-4 md:mb-0">
-            <img src="/image/band2_700_1400nm.png" alt="band2" class="w-full md:w-1/2 rounded mb-4 md:mb-0">
+            <img src="./image/band1_381_2492nm.png" alt="band1" class="w-full md:w-1/2 rounded mb-4 md:mb-0">
+            <img src="./image/band2_700_1400nm.png" alt="band2" class="w-full md:w-1/2 rounded mb-4 md:mb-0">
         </div>
         <p class="text-justify">
             我們目前的光譜分析能成功區分水體、農耕地與自然植被，但對於建築物與沙地區域的判識仍具挑戰性。根據 <span class="font-bold">Z-score</span> 數值與衛星影像對照，我們最終選取多個特徵熱點，並將結果呈現為互動式地圖。
