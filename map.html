@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,8 @@
     <title>植物多樣性地圖</title>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./modules/tailwind.css"></script>
+
 
     <!-- Leaflet 樣式 -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -24,25 +25,7 @@
         }
 
         #map {
-            height: 80vh;
-        }
-
-        .leaflet-control-colorbar {
-            padding: 10px;
-            background: white;
-            font-size: 12px;
-            line-height: 1.2;
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
-
-        .colorbar-gradient {
-            width: 20px;
-            height: 150px;
-            margin-right: 8px;
-            border: 1px solid #999;
-            display: inline-block;
-            vertical-align: middle;
+            height: 92vh;
         }
     </style>
 </head>
@@ -50,87 +33,56 @@
 <body class="h-screen flex flex-col">
 
     <!-- 導覽列 -->
-    <nav class="bg-gray-800 text-white px-6 py-3 flex space-x-6 shadow-md">
-        <a href="index.html" class="hover:text-yellow-300">簡介</a>
-        <a href="map.html" class="hover:text-yellow-300 transition">地圖</a>
-        <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
-        <a href="reference.html" class="hover:text-yellow-300 transition">參考資料</a>
-        <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
+    <nav class="bg-gray-800 text-white px-6 py-3 flex space-x-6 shadow-md flex items-center justify-between">
+        <!-- 左側 Logo 與文字 -->
+        <div class="flex items-center space-x-3">
+            <img src="image/QoQ.png" alt="Logo" class="h-8 w-8 rounded">
+            <span class="text-xl font-bold tracking-wide">植物多樣性地圖</span>
+        </div>
+
+        <!-- 右側導覽連結 -->
+        <div class="flex space-x-6">
+            <a href="index.html" class="hover:text-yellow-300">簡介</a>
+            <a href="map.html" class="hover:text-yellow-300">地圖</a>
+            <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
+            <a href="reference.html" class="hover:text-yellow-300">參考資料</a>
+            <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
+        </div>
     </nav>
 
-    <!-- 地圖容器：使用 flex-1 讓地圖自動撐滿剩餘空間 -->
-    <div id="map" class="flex-1"></div>
-
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
-    </script>
-
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+    <div id="colorbar-container" 
+     class="fixed bottom-4 right-4 bg-white p-2 rounded shadow-md text-sm z-[9999]">
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="./map.js"></script>
     <script>
-        // -------------------------------------------------------------------
-        // 1. 初始化地圖
-        // -------------------------------------------------------------------
-        var map = L.map('map').setView([-34.5, 19.6], 9);
 
-        // -------------------------------------------------------------------
-        // 2. 設定底圖圖層
-        // -------------------------------------------------------------------
-        var layer_google = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga');
-        var layer_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    // 產生 colorbar HTML 區塊
+    function setColorbar(gradientCSS, labelHigh, labelLow) {
+        const div = document.getElementById("colorbar-container");
 
-        layer_google.addTo(map);
+        div.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <div style="background:${gradientCSS}; 
+                            width:20px; 
+                            height:150px; 
+                            border:1px solid #999;">
+                </div>
 
-        // -------------------------------------------------------------------
-        // 3. 圖層控制器
-        // -------------------------------------------------------------------
-        var baseLayers = {
-            "衛星地圖": layer_google,
-            "OSM地圖": layer_osm
-        };
-        L.control.layers(baseLayers).addTo(map);
+                <div class="flex flex-col justify-between h-[150px]">
+                    <span>${labelHigh}</span>
+                    <span class="mt-auto">${labelLow}</span>
+                </div>
+            </div>
+        `;
+    }
 
-        // -------------------------------------------------------------------
-        // 4. Colorbar 建立函式
-        // -------------------------------------------------------------------
-        function createColorbar(gradientCSS, labelHigh, labelLow) {
-            var control = L.control({ position: 'bottomright' });
-            control.onAdd = function() {
-                var div = L.DomUtil.create('div', 'leaflet-control-colorbar bg-white p-3 rounded shadow-md text-sm leading-tight flex items-center space-x-2');
-
-                div.innerHTML =
-                    '<div class="colorbar-gradient" style="background:' + gradientCSS + '; width:20px; height:150px; border:1px solid #999;"></div>' +
-                    '<div class="flex flex-col justify-between h-[150px]">' +
-                    '  <span>' + labelHigh + '</span>' +
-                    '  <span class="mt-auto">' + labelLow + '</span>' +
-                    '</div>';
-
-                return div;
-            };
-            return control;
-        }
-
-        // -------------------------------------------------------------------
-        var colorbar_google = createColorbar(
-            "linear-gradient(to top, blue, cyan, yellow, orange, red)",
-            "高", "低"
-        );
-
-        var colorbar_osm = createColorbar(
-            "linear-gradient(to top, purple, pink, white)",
-            "多", "少"
-        );
-
-        colorbar_google.addTo(map);
-
-        map.on('baselayerchange', function(e) {
-            map.removeControl(colorbar_google);
-            map.removeControl(colorbar_osm);
-
-            if (e.name === "衛星地圖") colorbar_google.addTo(map);
-            if (e.name === "OSM地圖") colorbar_osm.addTo(map);
-        });
     </script>
 
+    
 </body>
 
 </html>

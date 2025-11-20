@@ -3,39 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>植物多樣性地圖</title>
+    <title>參考資料</title>
+
     <link rel="icon" href="image/QoQ.png" type="image/png" />
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        html, body {
-            margin: 0;
-            height: 100%;
-            overflow: hidden; /* 關閉捲動 */
-        }
 
-        .page {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transform: scale(1.07);
-            transition: opacity 1.1s ease, transform 1.2s ease;
-            pointer-events: none;
-        }
-
-        .page.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
-        /* Tailwind utility-based background */
         .bg-lab {
-            background-image: url('../image/background.webp');
+            background-image: url('image/background.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -44,16 +20,62 @@
     </style>
 </head>
 
-<body class="h-screen flex flex-col">
+<body class="min-h-screen bg-lab">
 
-    <!-- 導覽列 -->
-    <nav class="bg-gray-800 text-white px-6 py-3 flex space-x-6 shadow-md">
+<!-- 導覽列 -->
+<nav class="absolute top-0 left-0 w-full px-6 py-3 bg-black/30 backdrop-blur-sm text-white flex items-center justify-between z-50">
+    <!-- 左側 Logo 與文字 -->
+    <div class="flex items-center space-x-3">
+        <img src="image/QoQ.png" alt="Logo" class="h-8 w-8 rounded">
+        <span class="text-xl font-bold tracking-wide">植物多樣性地圖</span>
+    </div>
+
+    <!-- 右側導覽連結 -->
+    <div class="flex space-x-6">
         <a href="index.html" class="hover:text-yellow-300">簡介</a>
-        <a href="map.html" class="hover:text-yellow-300 transition">地圖</a>
+        <a href="map.html" class="hover:text-yellow-300">地圖</a>
         <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
-        <a href="reference.html" class="hover:text-yellow-300 transition">參考資料</a>
+        <a href="reference.html" class="hover:text-yellow-300">參考資料</a>
         <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
-    </nav>
-</body>
+    </div>
+</nav>
 
+    <!-- ======== 主內容 ======== -->
+    <div class="max-w-5xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+
+        <h1 class="text-3xl font-bold mb-6">參考資料</h1>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">資料來源</h2>
+            <ul class="list-disc ml-6 space-y-2">
+                <li><a class="text-blue-600 underline" href="https://www.spaceappschallenge.org/2023/challenges/explore-a-biodiversity-hotspot-with-imaging-spectroscopy/">NASA Space Apps Challenge</a></li>
+                <li><a class="text-blue-600 underline" href="https://earth.jpl.nasa.gov/emit/data/data-portal/coverage-and-forecasts/">EMIT Imaging Spectroscopy Data</a></li>
+            </ul>
+        </section>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">指標分析</h2>
+            <ul class="list-disc ml-6 space-y-2">
+                <li><a class="text-blue-600 underline" href="https://www.tiri.narl.org.tw/Publication/InstTdy_Full/2300?PubId=220">Taiwan Instrument Research Institute</a></li>
+            </ul>
+        </section>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">文獻</h2>
+            <ul class="list-disc ml-6 space-y-4">
+                <li>Dahlin, K. M., Asner, G. P., & Field, C. B. (2013). Environmental and community controls on plant canopy chemistry in a Mediterranean-type ecosystem. Proceedings of the National Academy of Sciences, 110(17), 6895–6900. https://doi.org/10.1073/pnas.1215513110</li>
+                <li>Gholizadeh, H., Gamon, J. A., Townsend, P. A., Zygielbaum, A. I., Helzer, C. J., Hmimina, G. Y., Yu, R., Moore, R. M., Schweiger, A. K., & Cavender-Bares, J. (2019). Detecting prairie biodiversity with airborne remote sensing. Remote Sensing of Environment, 221, 38–49. https://doi.org/10.1016/j.rse.2018.10.037</li>
+                <li>Mulder, V. L., de Bruin, S., Schaepman, M. E., & Mayr, T. R. (2011). The use of remote sensing in soil and terrain mapping—A review. Geoderma, 162(1), 1–19. https://doi.org/10.1016/j.geoderma.2010.12.018</li>
+                <li>Pan, X., Zhu, X., Yang, Y., Cao, C., Zhang, X., & Shan, L. (2018). Applicability of Downscaling Land Surface Temperature by Using Normalized Difference Sand Index. Scientific Reports, 8(1), Article 1. https://doi.org/10.1038/s41598-018-27905-0</li>
+                <li>Schnitzler, J., Barraclough, T. G., Boatwright, J. S., Goldblatt, P., Manning, J. C., Powell, M. P., Rebelo, T., & Savolainen, V. (2011). Causes of Plant Diversification in the Cape Biodiversity Hotspot of South Africa. Systematic Biology, 60(3), 343–357. https://doi.org/10.1093/sysbio/syr006</li>
+                <li>Ustin, S. L., & Gamon, J. A. (2010). Remote sensing of plant functional types. New Phytologist, 186(4), 795–816. https://doi.org/10.1111/j.1469-8137.2010.03284.x</li>
+                <li>Wang, R., & Gamon, J. A. (2019). Remote sensing of terrestrial plant biodiversity. Remote Sensing of Environment, 231, 111218. https://doi.org/10.1016/j.rse.2019.111218</li>
+
+            </ul>
+        </section>
+
+    </div>
+
+</body>
 </html>
+

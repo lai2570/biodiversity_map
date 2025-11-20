@@ -3,57 +3,134 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>植物多樣性地圖</title>
+    <title>參考資料</title>
+
     <link rel="icon" href="image/QoQ.png" type="image/png" />
     <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
-        html, body {
-            margin: 0;
-            height: 100%;
-            overflow: hidden; /* 關閉捲動 */
-        }
-
-        .page {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transform: scale(1.07);
-            transition: opacity 1.1s ease, transform 1.2s ease;
-            pointer-events: none;
-        }
-
-        .page.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
-        /* Tailwind utility-based background */
         .bg-lab {
-            background-image: url('../image/background.webp');
+            background-image: url('image/background.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
+        .page.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        
+        .formula {
+            display: block;    /* 占滿一整行（段落模式） */
+            margin: 1.5em 0;   /* 與上下內容保持距離 */
+            font-weight: bold; /* 粗體 */
+        }
+
     </style>
 </head>
 
-<body class="h-screen flex flex-col">
+<body class="bg-lab">
 
     <!-- 導覽列 -->
-    <nav class="bg-gray-800 text-white px-6 py-3 flex space-x-6 shadow-md">
-        <a href="index.html" class="hover:text-yellow-300">簡介</a>
-        <a href="map.html" class="hover:text-yellow-300 transition">地圖</a>
-        <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
-        <a href="reference.html" class="hover:text-yellow-300 transition">參考資料</a>
-        <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
+    <nav class="absolute top-0 left-0 w-full px-6 py-3 bg-black/30 backdrop-blur-sm text-white flex items-center justify-between z-50">
+        <!-- 左側 Logo 與文字 -->
+        <div class="flex items-center space-x-3">
+            <img src="image/QoQ.png" alt="Logo" class="h-8 w-8 rounded">
+            <span class="text-xl font-bold tracking-wide">植物多樣性地圖</span>
+        </div>
+
+        <!-- 右側導覽連結 -->
+        <div class="flex space-x-6">
+            <a href="index.html" class="hover:text-yellow-300">簡介</a>
+            <a href="map.html" class="hover:text-yellow-300">地圖</a>
+            <a href="analysis.html" class="hover:text-yellow-300">研究方法</a>
+            <a href="reference.html" class="hover:text-yellow-300">參考資料</a>
+            <a href="aboutus.html" class="hover:text-yellow-300 transition">關於我們</a>
+        </div>
     </nav>
+    <div class="max-w-5xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+
+    <!-- 頁面標題 -->
+    <h1 class="text-3xl font-bold mb-6">研究方法</h1>
+
+    <!-- Data pre-processing -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">資料前處理</h2>
+        <p class="text-justify mb-4">
+            首先，我們從美國國家航空暨太空總署（NASA）的EMIT任務官方網站下載高光譜影像圖，並進行正交校正以及大氣校正。隨後，利用多種指標（例如歸一化植被指數與歸一化水體指數）對數據進行標準化處理。
+        </p>
+
+        <!-- NDVI -->
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">1. NDVI</h3>
+            <div class="md:grid md:grid-cols-2 md:gap-6 items-start">
+                <img src="/image/NDVI.jpg" alt="NDVI" class="w-full md:w-auto rounded mb-4 md:mb-0">
+                <div>
+                    <p class="font-bold mb-1">歸一化植被指標(NDVI):</p>
+                    <p class="text-justify mb-1">
+                        歸一化植被指標與植被分布密切相關。較高的NDVI值代表該區域在近紅外波段具有較強的反射特性，而近紅外反射率的提升通常反映更茂盛的植物生長。
+                 
+                    </p>
+                    <p class="text-justify">
+                        本研究採用
+                        <span class="formula">NDVI ((842nm-665nm)/(842nm+665nm)) < 0.35</span>
+                        為閾值，以排除植被覆蓋度較低的區域。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NDWI -->
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">2. NDWI</h3>
+            <div class="md:grid md:grid-cols-2 md:gap-6 items-start">
+                <img src="/image/NDWI.jpg" alt="NDWI" class="w-full md:w-auto rounded mb-4 md:mb-0">
+                <div>
+                    <p class="font-bold mb-1">歸一化水體指標 (NDWI):</p>
+                    <p class="text-justify mb-1">
+                        歸一化水體指數利用遙感影像中的綠光與近紅外波段，對水體區域的存在具有顯著響應特性。
+                    </p>
+                    <p class="text-justify">
+                        本研究採用
+                        <span class="formula">NDWI ((560nm-842nm)/(560nm+842nm)) > 0 </span>
+                        為閾值，以排除水體區域。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <!-- Method -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">方法</h2>
+        <p class="text-justify mb-2">
+            根據本研究假設，具有高植物多樣性的區域在總面積中佔比較小。由於這些區域聚集多種稀有物種，其植被特徵預期將與其他地區呈現顯著差異，此種差異具體體現於光譜數據之中。
+        </p>
+        <p class="text-justify mb-2">
+            為識別植物多樣性，我們針對每個像素的光譜數據，計算特定波長區間的 <span class="font-bold">Z-score</span> 數值。這些 <span class="font-bold">Z-score</span> 數據有助於定位光譜特徵偏差最顯著的網格點位。
+        </p>
+        <p class="text-justify">
+            後續透過建立以 <span class="font-bold">Z-score</span> 值進行色彩編碼的分布圖，即可有效辨識植物多樣性熱點區域。
+        </p>
+    </section>
+
+    <!-- Result -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">結果</h2>
+        <div class="md:flex md:space-x-4 mb-4">
+            <img src="/image/band1_381_2492nm.png" alt="band1" class="w-full md:w-1/2 rounded mb-4 md:mb-0">
+            <img src="/image/band2_700_1400nm.png" alt="band2" class="w-full md:w-1/2 rounded mb-4 md:mb-0">
+        </div>
+        <p class="text-justify">
+            我們目前的光譜分析能成功區分水體、農耕地與自然植被，但對於建築物與沙地區域的判識仍具挑戰性。根據 <span class="font-bold">Z-score</span> 數值與衛星影像對照，我們最終選取多個特徵熱點，並將結果呈現為互動式地圖。
+        </p>
+    </section>
+
+    </div>
+
+
+
+
 </body>
 
 </html>
