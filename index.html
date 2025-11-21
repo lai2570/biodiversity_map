@@ -23,8 +23,8 @@
             align-items: center;       /* 水平置中 */
             opacity: 0;                /* 預設透明 */
             transform: translateY(80px);/* 新頁面從下方出現 */            
-            transition: opacity 0.4s ease, /* 淡入動畫時間 */
-                        transform 1.0s ease; /* 縮放動畫時間 */
+            transition: opacity 0.9s ease, /* 淡入動畫時間 */
+                        transform 0.9s ease; /* 縮放動畫時間 */
             pointer-events: none;      /* 不可互動（避免透明時點擊到） */
         }
 
@@ -52,11 +52,11 @@
         }
         /* 描邊粗度 + 顏色 + 陰影*/
         .title-outline {
-            -webkit-text-stroke: 1px black;
+            -webkit-text-stroke: 1.2px black;
             text-shadow: none;
         }
         .text-outline {
-            -webkit-text-stroke: 0.5px black;
+            -webkit-text-stroke: 0.8px black;
             text-shadow: none;
         }
     </style>
@@ -84,32 +84,56 @@
 
 <!-- 第 1 頁 -->
 <div class="page page-1 active">
-    <h1 class="text-7xl font-bold tracking-wide drop-shadow-xl title-outline">植物多樣性地圖</h1>
-    <p class="mt-4 text-2xl font-bold max-w-xl text-center text-outline">透過衛星影像與地理資訊探索地球生態</p>
+    <h1 class="text-5xl font-bold tracking-wide drop-shadow-xl title-outline">植物多樣性地圖</h1>
+    <p class="mt-4 text-3xl font-bold max-w-xl text-center drop-shadow-xl text-outline">透過衛星影像與地理資訊探索地球生態</p>
 </div>
 
-<!-- 第 2 頁：圖片一 -->
+
+<!-- 第 2 頁：純文字 -->
 <div class="page page-2">
-    <img src="image/cape.jpg" class="rounded-xl shadow-2xl max-h-[70vh] object-contain w-1/2" />
-    <p class="mt-6 max-w-xl text-center bg-black/60 px-3 py-1 rounded text-gray-100">圖片一解說文字（可自行修改）</p>
-</div>
-
-<!-- 第 3 頁：圖片二 -->
-<div class="page page-3">
-    <img src="image/EMIT.jpg" class="rounded-xl shadow-2xl max-h-[70vh] object-contain w-1/2" />
-    <p class="mt-6 max-w-xl text-center bg-black/60 px-3 py-1 rounded text-gray-100">圖片二解說文字（可自行修改）</p>
-</div>
-
-<!-- 第 4 頁：純文字 -->
-<div class="page page-4">
-    <div class="max-w-2xl px-6 text-center text-2xl bg-black/60 px-3 py-1 rounded leading-relaxed text-gray-50 ">
-        本網站旨在以視覺化方式呈現全球(目前只有南非好望角)植物多樣性熱點，透過衛星光譜、遙測技術、GIS 分析與生態統計模型，
-        協助研究人員與保育工作者快速理解區域生態重要性與變遷趨勢。
+    <div class="max-w-4xl text-text-left text-2xl bg-black/70 px-3 py-1 rounded leading-relaxed text-gray-50 ">
+        <p>1. 南非開普植物區的多樣性極其豐富！但這裡的物種正面臨快速消失的危機。</p>
+        <p>2. EMIT數據擁有該區域詳細的高光譜資料，幫助我們識別植物多樣性熱點。</p>
+        <p>3. 我們利用葉片性狀指標的光譜多樣性作為變異性，來尋找多樣性熱點區域。</p>
     </div>
+</div>
 
 
-    <div class="mt-4 px-6 text-center text-2xl bg-black/60 px-3 py-1 rounded leading-relaxed text-gray-50 ">
-        點擊導覽列上的「地圖」看看我們的研究成果！
+<!-- 第 3 頁：圖片一 -->
+<div class="page page-3">
+    <img src="image/cape.jpg" class="rounded-xl shadow-2xl max-h-[70vh] object-contain w-1/2" />
+    <p class="mt-1 max-w-4xl text-center bg-black/70 px-3 py-1 rounded text-gray-100">南非開普地區</p>
+    <p class="mt-1 max-w-4xl text-center bg-black/70 px-3 py-1 rounded text-gray-100">目前公認全球共有六大植物區系王國。其中南非王國面積最小，僅涵蓋開普地區，面積約九萬平方公里。南非開普地區是極其特殊的生物多樣性熱點，擁有超過9,000種植物物種，其中近70%為特有種。然而這片區域正面臨多重威脅：火災模式轉變、棲息地破壞與氣候變遷。我們必須採取行動！</p>
+</div>
+
+
+
+<!-- 第 4 頁：圖片二 -->
+<div class="page page-4">
+    <img src="image/EMIT.jpg" class="rounded-xl shadow-2xl max-h-[70vh] object-contain w-1/2" />
+    <p class="mt-6 max-w-xl text-center bg-black/70 px-3 py-1 rounded text-gray-100">EMIT（地球表面礦塵源調查）是NASA的一項遙感探測任務，旨在測量地球表面塵埃源的礦物組成。</p>
+</div>
+
+<!-- 第 5 頁：純文字 -->
+<div class="page page-5">
+    <div class="max-w-2xl px-6 text-center text-2xl bg-black/70 px-3 py-1 rounded leading-relaxed text-gray-50 ">
+        這項任務試圖了解這些礦物塵埃粒子如何影響地球環境，特別是它們透過輻射產生的升溫和冷卻效應，並為氣候研究和環境科學收集重要數據。
+    </div>
+</div>
+
+<!-- 第 6 頁：純文字 -->
+<div class="page page-7">
+    <div class="max-w-2xl px-6 text-left text-2xl bg-black/70 px-3 py-1 rounded leading-relaxed text-gray-50 ">
+        主要目標有兩項：
+    </div>
+    <div class="max-w-2xl px-6 text-left text-2xl bg-black/70 px-3 py-1 rounded leading-relaxed text-gray-50 ">
+        1. 對礦物塵埃在地球大氣中的升溫與冷卻效應提供更精確的新評估
+    </div>
+    <div class="max-w-2xl px-6 text-left text-2xl bg-black/70 px-3 py-1 rounded leading-relaxed text-gray-50 ">
+        2. 預測未來氣候情境可能如何改變進入地球大氣層的礦物塵埃數量與類型
+    </div>
+    <div class="max-w-2xl px-6 text-left text-2xl bg-black/70 px-3 py-1 rounded leading-relaxed text-gray-50 ">
+        點擊地圖來看看我們的研究成果
     </div>
 </div>
 
@@ -162,7 +186,6 @@
     });
 </script>
 
-<!-- 圖片來源標註 -->
 
 
 </body>
